@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Ramayana Movie Night</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Pick the November weekend times you're free to see Ramayana together.">
+<meta property="og:title" content="Ramayana Movie Night">
+<meta property="og:description" content="Tap the November weekend afternoons and evenings you're free.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Hind:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a night-sky header band, then one row per November weekend with big tap-to-pick slot tiles; a sticky save bar at the bottom. */
+:root{
+  --bg:#F6F5FB; --surface:#FFFFFF; --ink:#1E1C4A; --muted:#5F5D80; --line:#DEDCEC;
+  --accent:#D9700B; --accent-ink:#FFFFFF; --accent-soft:#FCE9D4;
+  --heat:#F2A23A; --sky1:#1E1C4A; --sky2:#2F2B6E; --sky-ink:#FFF6E8; --gold:#F5B54A;
+  --ok:#1F7A4D;
+  --display:"Yatra One","Georgia",serif;
+  --body:"Hind","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#110F26; --surface:#1B1938; --ink:#F2F0FF; --muted:#A9A6CC; --line:#302D58;
+  --accent:#F5A33A; --accent-ink:#1B1938; --accent-soft:#3A2A1A;
+  --heat:#F5A33A; --sky1:#0B0A1C; --sky2:#221F52; --sky-ink:#FFF6E8; --gold:#F5B54A;
+  --ok:#5BC48D; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#110F26; --surface:#1B1938; --ink:#F2F0FF; --muted:#A9A6CC; --line:#302D58;
+  --accent:#F5A33A; --accent-ink:#1B1938; --accent-soft:#3A2A1A;
+  --heat:#F5A33A; --sky1:#0B0A1C; --sky2:#221F52; --sky-ink:#FFF6E8; --gold:#F5B54A;
+  --ok:#5BC48D; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:880px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+header.sky{background:radial-gradient(120% 140% at 85% 0%,var(--sky2) 0%,var(--sky1) 60%);color:var(--sky-ink);position:relative;overflow:hidden}
+header.sky .wrap{padding-block:36px 30px;position:relative;z-index:1}
+header.sky canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(34px,7vw,54px);line-height:1.05;margin:6px 0 10px;text-wrap:balance}
+.lede{max-width:56ch;margin:0;opacity:.92}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.facts span{border:1px solid rgba(245,181,74,.45);border-radius:999px;padding:3px 12px;font-size:14px}
+
+main .wrap{display:grid;gap:28px;padding-block:24px 120px}
+
+.step{display:grid;gap:10px}
+.step h2{font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0;font-weight:600}
+.namebox{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+#name{flex:1 1 240px;min-width:0;font:inherit;font-size:18px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink)}
+#name:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.hint{color:var(--muted);font-size:14px;margin:0}
+
+.notice{border-radius:12px;padding:12px 14px;background:var(--accent-soft);color:var(--ink);font-size:15px}
+
+.best{display:grid;gap:8px}
+.best ol{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.best li{display:flex;justify-content:space-between;gap:12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;flex-wrap:wrap}
+.best li:first-child{border-color:var(--accent)}
+.best .when{font-weight:600}
+.best .who{color:var(--muted);font-size:14px;min-width:0}
+.best .n{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent);white-space:nowrap}
+
+.weekend{display:grid;gap:10px}
+.weekend h3{margin:0;font-size:15px;color:var(--muted);font-weight:600}
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.days.single{grid-template-columns:minmax(0,1fr)}
+@media (min-width:640px){.days.single{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.day{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px;display:grid;gap:10px;min-width:0}
+.dayhead{display:flex;align-items:baseline;gap:8px}
+.dow{font-family:var(--display);font-size:22px;line-height:1}
+.date{color:var(--muted);font-size:15px}
+.slots{display:grid;gap:8px}
+
+.slot{appearance:none;font:inherit;color:var(--ink);text-align:left;cursor:pointer;border-radius:12px;border:1.5px solid var(--line);
+  background:linear-gradient(90deg,color-mix(in srgb,var(--heat) calc(var(--h,0)*38%),transparent) 0%,transparent 100%),var(--surface);
+  padding:10px 12px;display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;min-height:64px;transition:border-color .15s,transform .1s}
+.slot:hover{border-color:var(--accent)}
+.slot:active{transform:scale(.985)}
+.slot:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px;border-color:var(--accent)}
+.slot .lbl{font-weight:600}
+.slot .time{color:var(--muted);font-size:14px;grid-column:1}
+.slot .count{grid-row:1/3;grid-column:2;font-variant-numeric:tabular-nums;font-size:14px;color:var(--muted);text-align:right;line-height:1.2}
+.slot .count b{display:block;font-size:20px;color:var(--ink)}
+.slot .names{grid-column:1/-1;font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.slot .names:empty{display:none}
+.slot[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.slot[aria-pressed="true"] .lbl::before{content:"✓ ";color:var(--accent);font-weight:700}
+.slot[disabled]{cursor:default;opacity:.85}
+
+.people{display:flex;flex-wrap:wrap;gap:8px}
+.people span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:14px}
+.empty{color:var(--muted);font-size:15px;margin:0}
+
+.savebar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+.savebar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+#status{font-size:15px;color:var(--muted);min-width:0}
+#status.ok{color:var(--ok);font-weight:600}
+#save{font:inherit;font-weight:700;font-size:17px;border:0;border-radius:12px;padding:12px 22px;background:var(--accent);color:var(--accent-ink);cursor:pointer;white-space:nowrap}
+#save:disabled{opacity:.45;cursor:default}
+#save:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="sky">
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="eyebrow">Movie night · November</div>
+    <h1>Ramayana: Rise of a Legend</h1>
+    <p class="lede">Let's go see it together. Tap every weekend afternoon or evening you're free, then press <b>Save my times</b>. The most popular slot wins.</p>
+    <div class="facts"><span>In theatres Nov 5</span><span>Ranbir Kapoor · Yash · Sai Pallavi</span><span>Central New Jersey</span></div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div id="notice" class="notice" hidden></div>
+
+    <section class="step" aria-labelledby="s1">
+      <h2 id="s1">1 · Your name</h2>
+      <div class="namebox"><input id="name" type="text" autocomplete="given-name" placeholder="e.g. Priya" maxlength="40"></div>
+    </section>
+
+    <section class="step" aria-labelledby="s2">
+      <h2 id="s2">2 · Tap the times you're free</h2>
+      <p class="hint">Afternoon is noon to 5 PM, evening is 5 to 10 PM. Tap again to unselect. The shading shows how many people are free.</p>
+      <div id="grid" style="display:grid;gap:22px"></div>
+    </section>
+
+    <section class="step best" aria-labelledby="s3">
+      <h2 id="s3">Best times so far</h2>
+      <ol id="best"></ol>
+      <p id="bestEmpty" class="empty">No one has picked a time yet. Be the first.</p>
+    </section>
+
+    <section class="step" aria-labelledby="s4">
+      <h2 id="s4">Who's answered</h2>
+      <div id="people" class="people"></div>
+      <p id="peopleEmpty" class="empty">No answers yet.</p>
+    </section>
+  </div>
+</main>
+
+<div class="savebar"><div class="wrap">
+  <span id="status">Pick your times, then save.</span>
+  <button id="save" type="button" disabled>Save my times</button>
+</div></div>
+
+<script>
+const DAYS = [
+  {key:"2026-11-01",dow:"Sun",date:"Nov 1",wk:"Nov 1"},
+  {key:"2026-11-07",dow:"Sat",date:"Nov 7",wk:"Nov 7–8"},
+  {key:"2026-11-08",dow:"Sun",date:"Nov 8",wk:"Nov 7–8"},
+  {key:"2026-11-14",dow:"Sat",date:"Nov 14",wk:"Nov 14–15"},
+  {key:"2026-11-15",dow:"Sun",date:"Nov 15",wk:"Nov 14–15"},
+  {key:"2026-11-21",dow:"Sat",date:"Nov 21",wk:"Nov 21–22"},
+  {key:"2026-11-22",dow:"Sun",date:"Nov 22",wk:"Nov 21–22"},
+  {key:"2026-11-28",dow:"Sat",date:"Nov 28",wk:"Nov 28–29"},
+  {key:"2026-11-29",dow:"Sun",date:"Nov 29",wk:"Nov 28–29"},
+];
+const SLOTS = [
+  {k:"aft",label:"Afternoon",time:"12 – 5 PM"},
+  {k:"eve",label:"Evening",time:"5 – 10 PM"},
+];
+const slotId = (d,s) => d+"_"+s;
+const slotName = id => { const [d,s]=id.split("_"); const day=DAYS.find(x=>x.key===d); const sl=SLOTS.find(x=>x.k===s); return day&&sl ? `${day.dow}, ${day.date} · ${sl.label}` : id; };
+
+const API="https://relwzrtxfmeehazoczof.supabase.co/rest/v1";
+const KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJlbHd6cnR4Zm1lZWhhem9jem9mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3ODQ3NzIsImV4cCI6MjA5MjM2MDc3Mn0.jldd-Gwy2Kdp1_payu6aEafYCTqI6xadwF8NizU1k-M";
+const HDRS={apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":"application/json"};
+
+// Each browser keeps its own id + secret token so the person can come back and change their answer.
+function identity(){
+  const fresh=()=>({id:crypto.randomUUID(), token:crypto.randomUUID()+crypto.randomUUID()});
+  try{
+    const s=JSON.parse(localStorage.getItem("ramayana-poll-me")||"null");
+    if(s && s.id && s.token) return s;
+    const f=fresh(); localStorage.setItem("ramayana-poll-me",JSON.stringify(f)); return f;
+  }catch(e){ return fresh(); }
+}
+const me=identity();
+
+let db=null, uid=me.id, readOnly=false, dirty=false;
+let responses=new Map();      // uid -> {name, slots}
+let mine=new Set(), saved=new Set(), savedName="";
+
+const $ = id => document.getElementById(id);
+const nameEl=$("name"), saveBtn=$("save"), statusEl=$("status");
+
+function notice(msg){ const n=$("notice"); n.textContent=msg; n.hidden=!msg; }
+
+function tally(){
+  const t={};
+  for(const [id,r] of responses){
+    if(id===uid) continue;
+    for(const s of (r.slots||[])) (t[s] ||= []).push(r.name||"Someone");
+  }
+  // this viewer's current (possibly unsaved) picks count live
+  const me = nameEl.value.trim() || "You";
+  for(const s of mine) (t[s] ||= []).push(me);
+  return t;
+}
+
+function render(){
+  const t=tally();
+  const max=Math.max(1,...Object.values(t).map(a=>a.length));
+  const grid=$("grid"); grid.textContent="";
+  const weeks=[...new Set(DAYS.map(d=>d.wk))];
+  for(const wk of weeks){
+    const sec=document.createElement("div"); sec.className="weekend";
+    const h=document.createElement("h3"); h.textContent="Weekend of "+wk; sec.append(h);
+    const row=document.createElement("div"); const days=DAYS.filter(d=>d.wk===wk);
+    row.className="days"+(days.length===1?" single":"");
+    for(const d of days){
+      const card=document.createElement("div"); card.className="day";
+      card.innerHTML=`<div class="dayhead"><span class="dow"></span><span class="date"></span></div><div class="slots"></div>`;
+      card.querySelector(".dow").textContent=d.dow==="Sat"?"Saturday":"Sunday";
+      card.querySelector(".date").textContent=d.date;
+      const slots=card.querySelector(".slots");
+      for(const s of SLOTS){
+        const id=slotId(d.key,s.k), who=t[id]||[];
+        const b=document.createElement("button"); b.type="button"; b.className="slot"; b.id="slot-"+id;
+        b.setAttribute("aria-pressed", mine.has(id)?"true":"false");
+        b.style.setProperty("--h", (who.length/max).toFixed(2));
+        b.disabled=readOnly;
+        b.innerHTML=`<span class="lbl"></span><span class="time"></span><span class="count"><b></b>free</span><span class="names"></span>`;
+        b.querySelector(".lbl").textContent=s.label;
+        b.querySelector(".time").textContent=s.time;
+        b.querySelector(".count b").textContent=who.length;
+        b.querySelector(".names").textContent=who.length>4?who.slice(0,4).join(", ")+` +${who.length-4}`:who.join(", ");
+        b.setAttribute("aria-label",`${d.dow} ${d.date} ${s.label}, ${who.length} free${mine.has(id)?", selected":""}`);
+        b.addEventListener("click",()=>{ mine.has(id)?mine.delete(id):mine.add(id); markDirty(); render(); });
+        slots.append(b);
+      }
+      row.append(card);
+    }
+    sec.append(row); grid.append(sec);
+  }
+
+  // best times
+  const ranked=Object.entries(t).filter(([,w])=>w.length).sort((a,b)=>b[1].length-a[1].length || a[0].localeCompare(b[0])).slice(0,3);
+  const total=new Set([...responses.keys()].filter(k=>k!==uid)).size + (mine.size||saved.size?1:0);
+  const best=$("best"); best.textContent="";
+  for(const [id,w] of ranked){
+    const li=document.createElement("li");
+    li.innerHTML=`<div style="min-width:0"><div class="when"></div><div class="who"></div></div><span class="n"></span>`;
+    li.querySelector(".when").textContent=slotName(id);
+    li.querySelector(".who").textContent=w.join(", ");
+    li.querySelector(".n").textContent=`${w.length} of ${Math.max(total,w.length)} free`;
+    best.append(li);
+  }
+  $("bestEmpty").hidden=ranked.length>0;
+
+  // people
+  const ppl=$("people"); ppl.textContent="";
+  const names=[...responses.entries()].filter(([k])=>k!==uid).map(([,r])=>r.name||"Someone");
+  if(saved.size && savedName) names.push(savedName+" (you)");
+  for(const n of names.sort((a,b)=>a.localeCompare(b))){ const s=document.createElement("span"); s.textContent=n; ppl.append(s); }
+  $("peopleEmpty").hidden=names.length>0;
+
+  saveBtn.disabled = readOnly || !db || !uid || !dirty;
+}
+
+function sameSets(a,b){ if(a.size!==b.size) return false; for(const x of a) if(!b.has(x)) return false; return true; }
+function markDirty(){
+  dirty = !sameSets(mine,saved) || nameEl.value.trim()!==savedName;
+  if(dirty){ statusEl.className=""; statusEl.textContent = mine.size ? `${mine.size} time${mine.size>1?"s":""} picked · not saved yet` : "Nothing picked · save to clear your answer"; }
+}
+nameEl.addEventListener("input",()=>{ markDirty(); render(); });
+
+saveBtn.addEventListener("click", async ()=>{
+  const name=nameEl.value.trim();
+  if(!name){ statusEl.className=""; statusEl.textContent="Add your name first."; nameEl.focus(); return; }
+  saveBtn.disabled=true; statusEl.className=""; statusEl.textContent="Saving…";
+  try{
+    const r=await fetch(API+"/rpc/ramayana_poll_save",{method:"POST",headers:HDRS,
+      body:JSON.stringify({p_id:me.id,p_token:me.token,p_name:name,p_slots:[...mine].sort()})});
+    if(!r.ok) throw new Error(await r.text());
+    saved=new Set(mine); savedName=mine.size?name:""; dirty=false;
+    statusEl.className="ok"; statusEl.textContent = mine.size ? "Saved. Thanks, "+name+"!" : "Your answer was cleared.";
+    await load();
+  }catch(e){
+    statusEl.className=""; statusEl.textContent = String(e.message||"").includes("poll is full") ? "The poll is full and couldn't save." : "Couldn't save. Check your connection and try again.";
+    dirty=true;
+  }
+  render();
+});
+
+async function load(){
+  const r=await fetch(API+"/ramayana_poll?select=id,name,slots&order=updated_at.asc",{headers:HDRS});
+  if(!r.ok) throw new Error("load failed");
+  const rows=await r.json();
+  responses=new Map(rows.map(x=>[x.id,{name:x.name,slots:x.slots}]));
+  if(!dirty){
+    const mineRow=responses.get(uid);
+    saved=new Set(mineRow ? mineRow.slots||[] : []); mine=new Set(saved); savedName=mineRow? mineRow.name||"" : "";
+    if(mineRow && mineRow.name){ nameEl.value=mineRow.name; statusEl.className="ok"; statusEl.textContent="Your times are saved. Change them anytime."; }
+  }
+  notice("");
+  render();
+}
+
+render();
+
+db=true;
+load().catch(()=>notice("Couldn't load everyone's answers. Check your connection and reload."));
+// pick up other people's answers while the page is open
+setInterval(()=>{ if(!document.hidden) load().catch(()=>{}); }, 20000);
+document.addEventListener("visibilitychange",()=>{ if(!document.hidden) load().catch(()=>{}); });
+
+// starfield for the header
+(function(){
+  const c=$("stars"); const x=c.getContext("2d"); if(!x) return;
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let w,h,stars=[];
+  function size(){ const r=c.getBoundingClientRect(), dpr=devicePixelRatio||1; w=r.width; h=r.height; c.width=w*dpr; c.height=h*dpr; x.setTransform(dpr,0,0,dpr,0,0);
+    stars=Array.from({length:Math.round(w*h/2600)},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.3+.3,p:Math.random()*6.28})); }
+  function draw(t){ x.clearRect(0,0,w,h);
+    for(const s of stars){ const a=.35+.45*Math.sin(s.p+t/900); x.fillStyle=`rgba(255,226,170,${a})`; x.beginPath(); x.arc(s.x,s.y,s.r,0,6.283); x.fill(); }
+    if(!reduce) requestAnimationFrame(draw); }
+  size(); addEventListener("resize",size); requestAnimationFrame(draw);
+})();
+</script>
+
+</body>
+</html>
