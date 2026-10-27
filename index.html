@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Ramayana Movie Night</title>
+<title>ShaShu Movie Night</title>
 <meta name="robots" content="noindex">
 <meta name="description" content="Pick the November weekend times you're free to see Ramayana together.">
-<meta property="og:title" content="Ramayana Movie Night">
-<meta property="og:description" content="Tap the November weekend afternoons and evenings you're free.">
+<meta property="og:title" content="ShaShu Movie Night">
+<meta property="og:description" content="Ramayana: Rise of a Legend. Tap the November times you are free.">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Hind:wght@400;500;600;700&display=swap">
@@ -42,6 +42,17 @@ header.sky canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600}
 h1{font-family:var(--display);font-weight:400;font-size:clamp(34px,7vw,54px);line-height:1.05;margin:6px 0 10px;text-wrap:balance}
 .lede{max-width:56ch;margin:0;opacity:.92}
+.hero{display:flex;gap:24px;align-items:flex-end}
+.herotext{min-width:0}
+.poster{flex:0 0 auto;width:clamp(96px,22vw,170px);border-radius:10px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.45);border:1px solid rgba(245,181,74,.35)}
+.poster img{display:block;width:100%;aspect-ratio:2/3;object-fit:cover}
+@media (max-width:520px){.hero{flex-direction:column;align-items:flex-start;gap:16px}}
+.stills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:22px}
+.stills a{position:relative;display:block;border-radius:10px;overflow:hidden;border:1px solid rgba(245,181,74,.25);color:var(--sky-ink);text-decoration:none}
+.stills img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;transition:transform .3s}
+.stills a:hover img{transform:scale(1.04)}
+.stills span{position:absolute;left:0;right:0;bottom:0;padding:16px 10px 6px;font-size:13px;font-weight:600;background:linear-gradient(transparent,rgba(11,10,28,.85))}
+.stills a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .facts span{border:1px solid rgba(245,181,74,.45);border-radius:999px;padding:3px 12px;font-size:14px}
 
@@ -66,9 +77,7 @@ main .wrap{display:grid;gap:28px;padding-block:24px 120px}
 
 .weekend{display:grid;gap:10px}
 .weekend h3{margin:0;font-size:15px;color:var(--muted);font-weight:600}
-.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.days.single{grid-template-columns:minmax(0,1fr)}
-@media (min-width:640px){.days.single{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.days{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;align-items:start}
 .day{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px;display:grid;gap:10px;min-width:0}
 .dayhead{display:flex;align-items:baseline;gap:8px}
 .dow{font-family:var(--display);font-size:22px;line-height:1}
@@ -111,10 +120,21 @@ main .wrap{display:grid;gap:28px;padding-block:24px 120px}
 <header class="sky">
   <canvas id="stars" aria-hidden="true"></canvas>
   <div class="wrap">
-    <div class="eyebrow">Movie night · November</div>
-    <h1>Ramayana: Rise of a Legend</h1>
-    <p class="lede">Let's go see it together. Tap every weekend afternoon or evening you're free, then press <b>Save my times</b>. The most popular slot wins.</p>
+   <div class="hero">
+    <a class="poster" href="https://www.fandango.com/ramayana-2026-245446/movie-overview" target="_blank" rel="noopener"><img src="https://images.fandango.com/ImageRenderer/400/0/redesign/static/img/default_poster--dark-mode.png/0/images/masterrepository/Fandango/245446/ramayana_presale.jpg" alt="Ramayana: Rise of a Legend poster" onerror="this.parentNode.hidden=true"></a>
+    <div class="herotext">
+    <div class="eyebrow">Ramayana: Rise of a Legend · November</div>
+    <h1>ShaShu Movie Night</h1>
+    <p class="lede">Let's go see it together. Pick <b>every</b> time that works for you, then press <b>Save my times</b>.</p>
+    <p class="lede">Exact showtimes aren't out yet. Theatres usually post them only a few days ahead, so we'll pick the time slot that works for the most people and book a show inside it once times are up.</p>
     <div class="facts"><span>In theatres Nov 5</span><span>Ranbir Kapoor · Yash · Sai Pallavi</span><span>Central New Jersey</span></div>
+    </div>
+   </div>
+    <div class="stills" aria-label="Trailer stills">
+      <a href="https://www.fandango.com/ramayana-2026-245446/movie-overview" target="_blank" rel="noopener"><img loading="lazy" src="https://images.fandango.com/imagerelay/666/0/video.fandango.com/MPX/image/NBCU_Fandango/731/11/thumb_65217FB2-BA2C-4B40-8F6A-9C9BF4AF1D49.jpg/image.jpg/redesign/static/img/noxSquare.jpg" alt="Still from Ramayana trailer 1" onerror="this.parentNode.hidden=true"><span>Watch trailer</span></a>
+      <a href="https://www.fandango.com/ramayana-2026-245446/movie-overview" target="_blank" rel="noopener"><img loading="lazy" src="https://images.fandango.com/imagerelay/666/0/video.fandango.com/MPX/image/NBCU_Fandango/666/995/thumb_2ec441fb-9104-11f1-a916-022bbbb30d69.jpg/image.jpg/redesign/static/img/noxSquare.jpg" alt="Still from Ramayana English dub trailer" onerror="this.parentNode.hidden=true"><span>Watch trailer</span></a>
+      <a href="https://www.fandango.com/ramayana-2026-245446/movie-overview" target="_blank" rel="noopener"><img loading="lazy" src="https://images.fandango.com/imagerelay/666/0/video.fandango.com/MPX/image/NBCU_Fandango/451/623/thumb_906a8dcd-c7ed-11f1-a916-022bbbb30d69.jpg/image.jpg/redesign/static/img/noxSquare.jpg" alt="Still from Ramayana English dub trailer 2" onerror="this.parentNode.hidden=true"><span>Watch trailer</span></a>
+    </div>
   </div>
 </header>
 
@@ -129,7 +149,7 @@ main .wrap{display:grid;gap:28px;padding-block:24px 120px}
 
     <section class="step" aria-labelledby="s2">
       <h2 id="s2">2 · Tap the times you're free</h2>
-      <p class="hint">Afternoon is noon to 5 PM, evening is 5 to 10 PM. Tap again to unselect. The shading shows how many people are free.</p>
+      <p class="hint">Fridays are evening only. Afternoon is noon to 5 PM, evening is 5 to 10 PM. Tap again to unselect. The shading shows how many people are free.</p>
       <div id="grid" style="display:grid;gap:22px"></div>
     </section>
 
@@ -154,16 +174,20 @@ main .wrap{display:grid;gap:28px;padding-block:24px 120px}
 
 <script>
 const DAYS = [
-  {key:"2026-11-01",dow:"Sun",date:"Nov 1",wk:"Nov 1"},
-  {key:"2026-11-07",dow:"Sat",date:"Nov 7",wk:"Nov 7–8"},
-  {key:"2026-11-08",dow:"Sun",date:"Nov 8",wk:"Nov 7–8"},
-  {key:"2026-11-14",dow:"Sat",date:"Nov 14",wk:"Nov 14–15"},
-  {key:"2026-11-15",dow:"Sun",date:"Nov 15",wk:"Nov 14–15"},
-  {key:"2026-11-21",dow:"Sat",date:"Nov 21",wk:"Nov 21–22"},
-  {key:"2026-11-22",dow:"Sun",date:"Nov 22",wk:"Nov 21–22"},
-  {key:"2026-11-28",dow:"Sat",date:"Nov 28",wk:"Nov 28–29"},
-  {key:"2026-11-29",dow:"Sun",date:"Nov 29",wk:"Nov 28–29"},
+  {key:"2026-11-06",dow:"Fri",date:"Nov 6",wk:"Nov 6–8",only:["eve"]},
+  {key:"2026-11-07",dow:"Sat",date:"Nov 7",wk:"Nov 6–8"},
+  {key:"2026-11-08",dow:"Sun",date:"Nov 8",wk:"Nov 6–8"},
+  {key:"2026-11-13",dow:"Fri",date:"Nov 13",wk:"Nov 13–15",only:["eve"]},
+  {key:"2026-11-14",dow:"Sat",date:"Nov 14",wk:"Nov 13–15"},
+  {key:"2026-11-15",dow:"Sun",date:"Nov 15",wk:"Nov 13–15"},
+  {key:"2026-11-20",dow:"Fri",date:"Nov 20",wk:"Nov 20–22",only:["eve"]},
+  {key:"2026-11-21",dow:"Sat",date:"Nov 21",wk:"Nov 20–22"},
+  {key:"2026-11-22",dow:"Sun",date:"Nov 22",wk:"Nov 20–22"},
+  {key:"2026-11-27",dow:"Fri",date:"Nov 27",wk:"Nov 27–29",only:["eve"]},
+  {key:"2026-11-28",dow:"Sat",date:"Nov 28",wk:"Nov 27–29"},
+  {key:"2026-11-29",dow:"Sun",date:"Nov 29",wk:"Nov 27–29"},
 ];
+const DOW_FULL={Fri:"Friday",Sat:"Saturday",Sun:"Sunday"};
 const SLOTS = [
   {k:"aft",label:"Afternoon",time:"12 – 5 PM"},
   {k:"eve",label:"Evening",time:"5 – 10 PM"},
@@ -220,10 +244,10 @@ function render(){
     for(const d of days){
       const card=document.createElement("div"); card.className="day";
       card.innerHTML=`<div class="dayhead"><span class="dow"></span><span class="date"></span></div><div class="slots"></div>`;
-      card.querySelector(".dow").textContent=d.dow==="Sat"?"Saturday":"Sunday";
+      card.querySelector(".dow").textContent=DOW_FULL[d.dow];
       card.querySelector(".date").textContent=d.date;
       const slots=card.querySelector(".slots");
-      for(const s of SLOTS){
+      for(const s of SLOTS.filter(s=>!d.only||d.only.includes(s.k))){
         const id=slotId(d.key,s.k), who=t[id]||[];
         const b=document.createElement("button"); b.type="button"; b.className="slot"; b.id="slot-"+id;
         b.setAttribute("aria-pressed", mine.has(id)?"true":"false");
