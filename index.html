@@ -169,7 +169,7 @@ main .wrap{display:grid;gap:28px;padding-block:24px 120px}
 
     <section class="step" aria-labelledby="s2">
       <h2 id="s2">2 · Tap the times you're free</h2>
-      <p class="hint">Fridays are evening only. Afternoon is noon to 5 PM, evening is 5 to 10 PM. Tap again to unselect. The shading shows how many people are free.</p>
+      <p class="hint">Fridays are evening only. Afternoon is 1 to 5 PM, evening is 5 to 10 PM. Tap again to unselect. The shading shows how many people are free.</p>
       <div id="grid" style="display:grid;gap:32px"></div>
     </section>
 
@@ -211,7 +211,7 @@ const BLOCKED=DAYS.filter(d=>d.blocked).map(d=>d.key);
 const open = s => !BLOCKED.some(k=>s.startsWith(k));
 const DOW_FULL={Fri:"Friday",Sat:"Saturday",Sun:"Sunday"};
 const SLOTS = [
-  {k:"aft",label:"Afternoon",time:"12 – 5 PM"},
+  {k:"aft",label:"Afternoon",time:"1 – 5 PM"},
   {k:"eve",label:"Evening",time:"5 – 10 PM"},
 ];
 const slotId = (d,s) => d+"_"+s;
