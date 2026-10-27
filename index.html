@@ -93,6 +93,13 @@ main .wrap{display:grid;gap:28px;padding-block:24px 120px}
 .dow{font-family:var(--display);font-size:22px;line-height:1}
 .date{color:var(--muted);font-size:15px}
 .slots{display:grid;gap:8px}
+.day.party{align-self:stretch}
+.party-box{flex:1;display:grid;justify-items:center;align-content:center;text-align:center;gap:6px;padding:18px 14px;border-radius:12px;min-height:140px;
+  background:repeating-linear-gradient(135deg,var(--accent-soft) 0 14px,color-mix(in srgb,var(--accent-soft) 70%,var(--surface)) 14px 28px);
+  border:1.5px dashed color-mix(in srgb,var(--accent) 60%,transparent)}
+.party-box .turkey{font-size:46px;line-height:1}
+.party-box strong{font-family:var(--display);font-weight:400;font-size:20px;line-height:1.2;text-wrap:balance}
+.party-box span:last-child{color:var(--muted);font-size:14px}
 
 .slot{appearance:none;font:inherit;color:var(--ink);text-align:left;cursor:pointer;border-radius:12px;border:1.5px solid var(--line);
   background:linear-gradient(90deg,color-mix(in srgb,var(--heat) calc(var(--h,0)*38%),transparent) 0%,transparent 100%),var(--surface);
@@ -197,9 +204,11 @@ const DAYS = [
   {key:"2026-11-21",dow:"Sat",date:"Nov 21",wk:"Nov 20–22"},
   {key:"2026-11-22",dow:"Sun",date:"Nov 22",wk:"Nov 20–22"},
   {key:"2026-11-27",dow:"Fri",date:"Nov 27",wk:"Nov 27–29",only:["eve"]},
-  {key:"2026-11-28",dow:"Sat",date:"Nov 28",wk:"Nov 27–29"},
+  {key:"2026-11-28",dow:"Sat",date:"Nov 28",wk:"Nov 27–29",blocked:"RupShuk Annual Thanksgiving Party"},
   {key:"2026-11-29",dow:"Sun",date:"Nov 29",wk:"Nov 27–29"},
 ];
+const BLOCKED=DAYS.filter(d=>d.blocked).map(d=>d.key);
+const open = s => !BLOCKED.some(k=>s.startsWith(k));
 const DOW_FULL={Fri:"Friday",Sat:"Saturday",Sun:"Sunday"};
 const SLOTS = [
   {k:"aft",label:"Afternoon",time:"12 – 5 PM"},
@@ -257,6 +266,16 @@ function render(){
     const row=document.createElement("div"); const days=DAYS.filter(d=>d.wk===wk);
     row.className="days"+(days.length===1?" single":"");
     for(const d of days){
+      if(d.blocked){
+        const party=document.createElement("div"); party.className="day party";
+        party.innerHTML=`<div class="dayhead"><span class="dow"></span><span class="date"></span></div>
+          <div class="party-box"><span class="turkey" aria-hidden="true">🦃</span><strong></strong><span>We're hosting, so this day is off the table for the movie.</span></div>`;
+        party.querySelector(".dow").textContent=DOW_FULL[d.dow];
+        party.querySelector(".date").textContent=d.date;
+        party.querySelector(".party-box strong").textContent=d.blocked;
+        row.append(party);
+        continue;
+      }
       const card=document.createElement("div"); card.className="day";
       card.innerHTML=`<div class="dayhead"><span class="dow"></span><span class="date"></span></div><div class="slots"></div>`;
       card.querySelector(".dow").textContent=DOW_FULL[d.dow];
@@ -335,7 +354,7 @@ async function load(){
   const r=await fetch(API+"/ramayana_poll?select=id,name,slots&order=updated_at.asc",{headers:HDRS});
   if(!r.ok) throw new Error("load failed");
   const rows=await r.json();
-  responses=new Map(rows.map(x=>[x.id,{name:x.name,slots:x.slots}]));
+  responses=new Map(rows.map(x=>[x.id,{name:x.name,slots:(x.slots||[]).filter(open)}]));
   if(!dirty){
     const mineRow=responses.get(uid);
     saved=new Set(mineRow ? mineRow.slots||[] : []); mine=new Set(saved); savedName=mineRow? mineRow.name||"" : "";
