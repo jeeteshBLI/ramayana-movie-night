@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>ShaShu Movie Night</title>
+<title>ShashuJo Movie Night</title>
 <meta name="robots" content="noindex">
 <meta name="description" content="Pick the November weekend times you're free to see Ramayana together.">
-<meta property="og:title" content="ShaShu Movie Night">
+<meta property="og:title" content="ShashuJo Movie Night">
 <meta property="og:description" content="Ramayana: Rise of a Legend. Tap the November times you are free.">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,7 +77,11 @@ main .wrap{display:grid;gap:28px;padding-block:24px 120px}
 .best .n{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent);white-space:nowrap}
 
 .weekend{display:grid;gap:10px}
-.weekend h3{margin:0;font-size:15px;color:var(--muted);font-weight:600}
+.weekend{gap:12px}
+.weekend h3{margin:0;justify-self:start;display:inline-flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  background:var(--accent-soft);color:var(--ink);border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);border-radius:999px;padding:6px 18px 4px}
+.weekend h3 .wk-label{font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--accent)}
+.weekend h3 .wk-dates{font-family:var(--display);font-weight:400;font-size:clamp(22px,4.5vw,26px);line-height:1.2}
 .days{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;align-items:start}
 .day{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px;display:grid;gap:10px;min-width:0}
 .dayhead{display:flex;align-items:baseline;gap:8px}
@@ -125,7 +129,7 @@ main .wrap{display:grid;gap:28px;padding-block:24px 120px}
     <a class="poster" href="https://www.fandango.com/ramayana-2026-245446/movie-overview" target="_blank" rel="noopener"><img src="https://images.fandango.com/ImageRenderer/400/0/redesign/static/img/default_poster--dark-mode.png/0/images/masterrepository/Fandango/245446/ramayana_presale.jpg" alt="Ramayana: Rise of a Legend poster" onerror="this.parentNode.hidden=true"></a>
     <div class="herotext">
     <div class="eyebrow">Ramayana: Rise of a Legend · November</div>
-    <h1>ShaShu Movie Night</h1>
+    <h1>ShashuJo Movie Night</h1>
     <p class="lede">Let's go see it together. Pick <b>every</b> time that works for you, then press <b>Save my times</b>.</p>
     <p class="lede">Exact showtimes aren't out yet. Theatres usually post them only a few days ahead, so we'll pick the time slot that works for the most people and book a show inside it once times are up.</p>
     <div class="facts"><span>In theatres Nov 5</span><span>Ranbir Kapoor · Yash · Sai Pallavi</span><span>Central New Jersey</span></div>
@@ -151,7 +155,7 @@ main .wrap{display:grid;gap:28px;padding-block:24px 120px}
     <section class="step" aria-labelledby="s2">
       <h2 id="s2">2 · Tap the times you're free</h2>
       <p class="hint">Fridays are evening only. Afternoon is noon to 5 PM, evening is 5 to 10 PM. Tap again to unselect. The shading shows how many people are free.</p>
-      <div id="grid" style="display:grid;gap:22px"></div>
+      <div id="grid" style="display:grid;gap:32px"></div>
     </section>
 
     <section class="step best" aria-labelledby="s3">
@@ -239,7 +243,9 @@ function render(){
   const weeks=[...new Set(DAYS.map(d=>d.wk))];
   for(const wk of weeks){
     const sec=document.createElement("div"); sec.className="weekend";
-    const h=document.createElement("h3"); h.textContent="Weekend of "+wk; sec.append(h);
+    const h=document.createElement("h3");
+    h.innerHTML=`<span class="wk-label">Weekend of</span><span class="wk-dates"></span>`;
+    h.querySelector(".wk-dates").textContent=wk; sec.append(h);
     const row=document.createElement("div"); const days=DAYS.filter(d=>d.wk===wk);
     row.className="days"+(days.length===1?" single":"");
     for(const d of days){
